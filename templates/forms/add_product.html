@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/AddProduct.css" />
+    <link type="text/css" rel="stylesheet" href="/static/css/Signup.css" />
+</head>
+<body>
+    <form method="post" class="form"  enctype ="multipart/form-data">
+        <!-- {{ form.csrf_token }} -->
+    <img src="{{ url_for('static',filename='/static/img/loader.gif') }}" alt="" class="loader">
+    <div class="alert-box">
+        <img src="{{ url_for('static',filename='/static/img/error.png') }}" class="alert-img" alt="">
+        <p class="alert-msg">error message</p>
+    </div>
+    <img  src="{{ url_for('static',filename='/static/img/Logo.png') }}" alt="" class="logo" />
+    <div class="form">
+        {{ form.product_name(class_ = 'form-control', placeholder='Product Name', autofocus = true) }}
+        {{ form.about_product(class_ = 'form-control', placeholder='short line about the product', autofocus = true) }}
+        {{ form.description(class_ = 'md-textarea form-control', placeholder=' detail du Product', autofocus = true) }}
+       
+        <!-- product image-->
+        <div class="product-info">
+            <div class="product-image"><p class="text">product image</p></div>
+            <div class="upload-image-sec">
+                <!-- upload inputs-->
+                <p class="text"><img src="{{ url_for('static',filename='/static/img/camera.png') }}" alt="">upload image</p>
+                <div class="upload-catalouge">
+                   
+                     {{ form.image_name(class_ = 'file-upload',  autofocus = true, id='first-file-upload-bt') }}
+                    <!-- <label for="first-file-upload-btn" class="upload-image"></label> -->
+                    
+                </div>
+            </div>
+            <div class="select-sizes">
+                <p class="text">size available</p>
+                <div class="sizes">
+                    <input type="checkbox" class="size-checkbox" id="xs" value="xs">
+                    <input type="checkbox" class="size-checkbox" id="s" value="s">
+                    <input type="checkbox" class="size-checkbox" id="m" value="m">
+                    <input type="checkbox" class="size-checkbox" id="l" value="l">
+                    <input type="checkbox" class="size-checkbox" id="xl" value="xl">
+                    <input type="checkbox" class="size-checkbox" id="xxl" value="xxl">
+                    <input type="checkbox" class="size-checkbox" id="xxxl" value="xxxl">
+                </div>
+            </div>
+        </div>
+        <!-- <div class="product-price">
+            <input type="number" id="actual-price" placeholder="actual-price" class="form-control">
+            <input type="number" id="discount" placeholder="discount percentage" class="form-control">
+            <input type="number" id="sell-price" placeholder="selling-price" class="form-control">
+        </div> -->
+
+        {{ form.quantity(class_ = 'form-control', placeholder='Quantity', autofocus = true) }}
+        {{ form.prices(class_ = 'form-control', placeholder='Prices', autofocus = true) }}
+        
+        <!-- <textarea id="tags" placeholder="Enter categories here, for example - Men, Jeans, Blue Jeans, Rough Jeans (you should add men or women at start)"></textarea> -->
+      
+        <!-- <input type="checkbox" class="checkbox" id="tac" checked>
+        <label for="tac">WilStore take 30% from your total sell</label> -->
+
+        {{ form.category_id( class_ = 'form-control',  autofocus = true) }}
+
+        <div class="buttons">
+            <input type="submit" value="add product" class="btn btn-primary" id="add-btn">
+            <button class="btn" id="save-btn" class="btn btn-info">save draft</button>
+        </div>
+        
+    </div>
+    
+    </fo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            rm>
+
+   
+<script src="js/token.js"></script>
+<script src="js/AddProduct.js"></script>
+
+
+</body>
+</html>
