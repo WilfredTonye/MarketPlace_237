@@ -17,6 +17,7 @@ from flask_wtf import FlaskForm
 import sys
 from forms import *
 from flask_uploads.flask_uploads import configure_uploads, IMAGES, UploadSet
+#from flask_uploads import configure_uploads, IMAGES, UploadSet
 from sqlalchemy import Table, Text
 from sqlalchemy.exc import SQLAlchemyError
 #----------------------------------------------------------------------------#
@@ -74,6 +75,12 @@ def search_products():
     product_rega = Product.query.filter(Product.product_name.ilike('%' + request.form['search_term'] + '%')).filter(Product.category_id == 3).all()
     return render_template('pages/Search.html',products=product_regard,productss=product_regar,productsss=product_rega)
     # return render_template('pages/Search.html', results=response, search_term=request.form.get('search_term', ''))
+
+       #home
+@app.route('/', methods=['GET'])
+def home():
+
+  return render_template('pages/index.html')
 
     #admin filtre
 @app.route('/admin/filter', methods=['POST', 'GET'])
