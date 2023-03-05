@@ -1,1 +1,1 @@
-ceci est un site web e-commerce de vente d'habit en ligne développé en html, css pour le front-end et node js pour le backend
+ceci est un Market place de vente en ligne développé en html, css pour le front-end et Flask pour le backend
