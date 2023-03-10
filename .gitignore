@@ -1,7 +1,7 @@
 node_modules
 Public/assets
 static/img/icons
-env
 migrations
 __pycache__
 uploads
+.env
