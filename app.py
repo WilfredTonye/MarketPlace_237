@@ -3,6 +3,7 @@
 #----------------------------------------------------------------------------#
 
 from ast import dump
+from ast import dumps
 import json
 import dateutil.parser
 import babel
