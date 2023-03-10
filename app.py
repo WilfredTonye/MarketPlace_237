@@ -16,7 +16,7 @@ from logging import Formatter, FileHandler
 from flask_wtf import FlaskForm
 import sys
 from forms import *
-from flask_uploads.flask_uploads import configure_uploads, IMAGES, UploadSet
+from flask_uploads import configure_uploads, IMAGES, UploadSet
 #from flask_uploads import configure_uploads, IMAGES, UploadSet
 from sqlalchemy import Table, Text
 from sqlalchemy.exc import SQLAlchemyError
