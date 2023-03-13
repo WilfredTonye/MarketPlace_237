@@ -1,0 +1,8 @@
+Génère moi le modèle Flask d'un market-place de manière général à l'aide de Sqlalchemy,
+ pour ce modèle 
+ *Tous les utilisateurs(vendeur , acheteur)sont authentifié par le service auth0
+-un vendeur peut prendre un abonnement pour vendre sur notre market place( il peut effectuer son abonnement par carte de crédit ou par PayPal) Et son abonnement peut arriver à échéance 
+-Un vendeur peut gérer un ou plusieurs produits et un produit peut être géré par un ou plusieurs vendeurs
+-Un acheteur peut acheter un ou plusieurs produits(par PayPal ou carte de crédit)et un produit peut être acheté par un ou plusieurs acheteurs
+-Une commande peut contenir un à plusieurs produits 
+-Un acheteur peut avoir une ou plusieurs commandes .
