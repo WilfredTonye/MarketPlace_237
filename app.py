@@ -1,4 +1,4 @@
-from flask import Flask,render_template, request, jsonify
+from flask import Flask,render_template, request, jsonify,redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
 from functools import wraps
@@ -6,8 +6,10 @@ from authlib.integrations.flask_client import OAuth
 import os
 from dotenv import load_dotenv
 from models import*
+
 # charge le fichier .env dans les variables d'environnement
 load_dotenv() 
+
 app = Flask(__name__)
 moment = Moment(app)
 
@@ -18,8 +20,10 @@ app.config['AUTH0_CLIENT_SECRET'] = os.getenv('AUTH0_CLIENT_SECRET')
 app.config['AUTH0_DOMAIN'] = os.getenv('AUTH0_DOMAIN')
 app.config['AUTH0_CALLBACK_URL'] = os.getenv('AUTH0_CALLBACK_URL')
 app.config['AUTH0_AUDIENCE'] = os.getenv('AUTH0_AUDIENCE')
+
 db = db_setup(app)
 # db.create_all()
+
 oauth = OAuth(app)
 
 auth0 = oauth.register(
@@ -33,7 +37,6 @@ auth0 = oauth.register(
         'scope': 'openid profile email',
     },
 )
-
 
 def requires_auth(f):
     @wraps(f)
@@ -68,26 +71,26 @@ def login():
 @app.route('/callback')
 def callback_handling():
     auth0.authorize_access_token()
-    # resp = auth0.get('userinfo')
-    # userinfo = resp.json()
+    resp = auth0.get('userinfo')
+    userinfo = resp.json()
+    session['jwt_token'] = auth0.token['access_token']
     print("utilisateur authentifié Avec success")
-    # return jsonify(userinfo)
+    return redirect("/")
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    params = {'returnTo': url_for('home', _external=True), 'client_id': app.config['AUTH0_CLIENT_ID']}
+    return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
 @app.route('/protected')
 @requires_auth
 def protected_route():
     return jsonify({'message': 'You are authorized to access this resource.'})
 
-
-
 @app.route('/', methods=['GET'])
 def home():
-
-  return render_template('pages/index.html')
+    return render_template('pages/index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
