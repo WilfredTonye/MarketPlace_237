@@ -4,6 +4,5 @@ static/img/icons
 migrations
 __pycache__
 uploads
-.env
 env
 .history
