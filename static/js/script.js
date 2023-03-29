@@ -87,3 +87,47 @@ for (let i = 0; i < accordionBtn.length; i++) {
   });
 
 }
+
+//=========== CART================//
+
+const cartIcon = document.querySelector('#btn-add');
+const cart = document.querySelector('.cart');
+const closeCart = document.querySelector('.cart-close');
+
+cartIcon.addEventListener('click', () => {
+  cart.classList.add('active')
+})
+
+closeCart.addEventListener('click', () => {
+  cart.classList.remove('active')
+})
+
+if (document.readyState == "loading") {
+  document.addEventListener('DOMContentLoaded', start);
+}else {
+  start();
+}
+
+//================ Start ==================
+function start() {
+  addevents()
+}
+
+//================ Update ==================
+function update() {
+  addevents()
+}
+
+//================ ADD EVENTS ==================
+function addevents() {
+  let cartRemove_btns = document.querySelectorAll('.cart-remove');
+  console.log(cartRemove_btns);
+  cartRemove_btns.forEach((btn) => {
+    btn.addEventListener('click', handle_removeCartItem)
+  })
+}
+
+//================ HANDLE EVENTS ==================
+function handle_removeCartItem() {
+  this.parentElement.remove();
+}

@@ -100,3 +100,7 @@ def home():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route('/admin', methods = ['GET'])
+def admin():
+    return render_template('pages/Admin.html')
