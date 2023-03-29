@@ -1,4 +1,5 @@
-from flask import Flask,render_template, request, jsonify,redirect, session
+from urllib.parse import urlencode
+from flask import Flask,render_template, request, jsonify,redirect, session,url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
 from functools import wraps
@@ -18,6 +19,11 @@ app.config['SECRET_KEY'] = os.urandom(32)
 app.config['AUTH0_CLIENT_ID'] = os.getenv('AUTH0_CLIENT_ID')
 app.config['AUTH0_CLIENT_SECRET'] = os.getenv('AUTH0_CLIENT_SECRET')
 app.config['AUTH0_DOMAIN'] = os.getenv('AUTH0_DOMAIN')
+app.config['AUTH0_METADATA'] = {
+    'jwks_uri': f'https://{app.config["AUTH0_DOMAIN"]}/.well-known/jwks.json',
+    'issuer': f'https://{app.config["AUTH0_DOMAIN"]}/'
+}
+
 app.config['AUTH0_CALLBACK_URL'] = os.getenv('AUTH0_CALLBACK_URL')
 app.config['AUTH0_AUDIENCE'] = os.getenv('AUTH0_AUDIENCE')
 
@@ -36,6 +42,7 @@ auth0 = oauth.register(
     client_kwargs={
         'scope': 'openid profile email',
     },
+    **app.config['AUTH0_METADATA']
 )
 
 def requires_auth(f):
@@ -61,9 +68,7 @@ def requires_auth(f):
             return f(*args, **kwargs)
         else:
             return jsonify({'message': 'Insufficient permissions.'}), 403
-
     return decorated
-
 @app.route('/login')
 def login():
     return auth0.authorize_redirect(redirect_uri=app.config['AUTH0_CALLBACK_URL'])
@@ -81,6 +86,7 @@ def callback_handling():
 def logout():
     session.clear()
     params = {'returnTo': url_for('home', _external=True), 'client_id': app.config['AUTH0_CLIENT_ID']}
+    print("Deconnecté avec success")
     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
 @app.route('/protected')
