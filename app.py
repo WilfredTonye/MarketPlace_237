@@ -67,6 +67,7 @@ def requires_auth(f):
         if 'role' in payload and payload['role'] == 'seller':
             return f(*args, **kwargs)
         else:
+            print()
             return jsonify({'message': 'Insufficient permissions.'}), 403
     return decorated
 @app.route('/login')
@@ -98,9 +99,13 @@ def protected_route():
 def home():
     return render_template('pages/index.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
 @app.route('/admin', methods = ['GET'])
 def admin():
     return render_template('pages/Admin.html')
+
+@app.route('/lg', methods = ['GET'])
+def login_success():
+    return "ENREGISTER AVEC SUCESS"
+
+if __name__ == '__main__':
+    app.run(debug=True)

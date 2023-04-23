@@ -34,6 +34,7 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     price = db.Column(db.Float, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     buyers = db.relationship('Buyer', secondary='orders', backref='products')
 
