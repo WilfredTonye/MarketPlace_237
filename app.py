@@ -88,7 +88,7 @@ def logout():
     session.clear()
     params = {'returnTo': url_for('home', _external=True), 'client_id': app.config['AUTH0_CLIENT_ID']}
     print("Deconnecté avec success")
-    return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
+    return redirect("lg")
 
 @app.route('/protected')
 @requires_auth
